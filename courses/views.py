@@ -91,6 +91,12 @@ class TestViewSet(viewsets.ModelViewSet):
 
     permission_classes = [permissions.IsAuthenticated, IsCourseOwnerOrReadOnly]
 
+    def get_permissions(self):
+        """Для submit_answers только аутентификация"""
+        if self.action == 'submit_answers':
+            return [permissions.IsAuthenticated()]
+        return [permission() for permission in self.permission_classes]
+
     def get_serializer_class(self):
         role = getattr(self.request.user, "role", "student")
         if role == "student":
@@ -133,7 +139,7 @@ class TestViewSet(viewsets.ModelViewSet):
 
         return Response(question_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    @action(detail=True, methods=["post"])
+    @action(detail=True, methods=["post"], permission_classes=[permissions.IsAuthenticated])
     def submit_answers(self, request, **kwargs):
         test = self.get_object()
 
