@@ -62,3 +62,18 @@ extend-exclude = '''
   | migrations
 )/
 '''
+[tool.coverage.run]
+source = ["."]
+omit = [
+    "*/migrations/*",
+    "*/tests.py",
+    "manage.py",
+    "config/asgi.py",
+    "config/wsgi.py",
+    "*/__init__.py",
+    "*/apps.py",
+]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 75

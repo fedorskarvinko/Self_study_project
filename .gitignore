@@ -206,3 +206,4 @@ database.ini
 
 reports/
 test_report.json
+htmlcov/
