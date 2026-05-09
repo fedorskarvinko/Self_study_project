@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 
 from users.models import CustomUser
 
+
 class Command(BaseCommand):
     """Создание суперпользователя (администратора)"""
 
@@ -25,6 +26,8 @@ class Command(BaseCommand):
             user.role = "admin"
             user.save()
 
-            self.stdout.write(self.style.SUCCESS(f"Администратор {email} создан! Пароль: {password}"))
+            self.stdout.write(
+                self.style.SUCCESS(f"Администратор {email} создан! Пароль: {password}")
+            )
         else:
             self.stdout.write(self.style.WARNING(f"Пользователь {email} уже существует"))

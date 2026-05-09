@@ -1,10 +1,11 @@
-from rest_framework import status, permissions, generics
+from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
+
 from .models import CustomUser
 from .serializers import (
-    UserRegistrationSerializer,
     UserProfileSerializer,
+    UserRegistrationSerializer,
 )
 
 
@@ -22,13 +23,16 @@ class RegistrationView(generics.CreateAPIView):
 
         refresh = RefreshToken.for_user(user)
 
-        return Response({
-            'user': UserProfileSerializer(user).data,
-            'tokens': {
-                'refresh': str(refresh),
-                'access': str(refresh.access_token),
-            }
-        }, status=status.HTTP_201_CREATED)
+        return Response(
+            {
+                "user": UserProfileSerializer(user).data,
+                "tokens": {
+                    "refresh": str(refresh),
+                    "access": str(refresh.access_token),
+                },
+            },
+            status=status.HTTP_201_CREATED,
+        )
 
 
 class ProfileView(generics.RetrieveUpdateAPIView):

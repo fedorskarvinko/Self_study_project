@@ -5,11 +5,7 @@ class IsAdminUser(permissions.BasePermission):
     """Доступ только для администраторов"""
 
     def has_permission(self, request, view):
-        return (
-                request.user and
-                request.user.is_authenticated and
-                request.user.is_admin
-        )
+        return request.user and request.user.is_authenticated and request.user.is_admin
 
 
 class IsTeacherUser(permissions.BasePermission):
@@ -17,7 +13,7 @@ class IsTeacherUser(permissions.BasePermission):
 
     def has_permission(self, request, view):
         return (
-                request.user and
-                request.user.is_authenticated and
-                (request.user.is_teacher or request.user.is_admin)
+            request.user
+            and request.user.is_authenticated
+            and (request.user.is_teacher or request.user.is_admin)
         )
