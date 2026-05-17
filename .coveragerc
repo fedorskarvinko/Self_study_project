@@ -1,0 +1,16 @@
+[run]
+source = .
+omit =
+    */migrations/*
+    */tests.py
+    manage.py
+    config/asgi.py
+    config/wsgi.py
+    */__init__.py
+    */apps.py
+    */admin.py
+    users/management/commands/csu.py
+
+[report]
+show_missing = True
+fail_under = 75
