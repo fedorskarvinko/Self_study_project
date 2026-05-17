@@ -93,7 +93,7 @@ class TestViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         """Для submit_answers только аутентификация"""
-        if self.action == 'submit_answers':
+        if self.action == "submit_answers":
             return [permissions.IsAuthenticated()]
         return [permission() for permission in self.permission_classes]
 
